@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import Cities from './src/Exercice1et2';
 import ResultCities from './src/Exercice3';
 import CitiesList from './src/Exercice4';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './src/reducer'
+import reducers from './src/reducer'
 
 
 const cities = [
@@ -21,20 +21,22 @@ const cities = [
 ]
 
 export default function App() {
-  const store = createStore (reducer);
+  const store = createStore (reducers);
 
  
 
   return (
     <Provider store = {store}>
     <View style={styles.container}>
+  
+      <CitiesList/>
       <ResultCities 
         data = {cities}    
       />
       <Cities 
         data = {cities}
       />
-      <CitiesList/>
+
     </View>
     </Provider>
   );
@@ -45,7 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginHorizontal: 20
   },
 });

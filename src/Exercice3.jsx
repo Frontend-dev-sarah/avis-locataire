@@ -1,34 +1,40 @@
 import React,  { useState } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import FilterBar from './components/FilterBar';
 
 const ResultCities  = ({data}) => {
     const [searchCountry, setSearchCountry] = useState('');
     const [cities, setCities] = useState([]);
     const searchResultCities = () => {
+      const check =  data.find( (item) => {
+           return item.country.toLowerCase() == searchCountry.toLowerCase()
+        }) 
+        if (check) {
+
         return data.filter((result) => {
             if(result.country == searchCountry){
                 const joined = cities.concat(result.name);
                 return setCities(joined)
-            } else {
-                alert("Your country does not exist yet")
             }
         })
+    } else {
+        alert('The country you searched does not exist yet')
+    }
     }
 
     return (
-        <View style = {{marginBottom: 50}}>
+        <View style = {{marginBottom: 50, flex: 0.35}}>
         <FilterBar
         searchItem = {searchCountry}
-        onChangeCity = {(country) => setSearchCountry(country)}
+        onChangeCountry = {(country) => setSearchCountry(country)}
         onSubmitEditing =  {() => searchResultCities()}
         />
         <Text>List of cities according to country search</Text>
-        <View>
+        <ScrollView>
        {cities.map((city) => {
-           return <Text>{city}</Text>
+           return <Text key = {city+Math.random().toString()}>{city}</Text> 
        })}
-        </View>
+        </ScrollView>
         </View>
 
     );
