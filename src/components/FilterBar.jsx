@@ -2,18 +2,17 @@ import React from 'react';
 import { TextInput,  View, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-const FilterBar = ({searchCity, onChangeCity, onSubmitEditing}) => {
+const FilterBar = ({searchCity, onChangeCountry, onSubmitEditing}) => {
    
 
     return <View style = {styles.container}>        
         <AntDesign name = 'search1' size = {25} color = 'black'/>
         <TextInput
-          placeholder = 'Search Cities'
+          placeholder = 'Search Cities By Typing A Country Name'
           autoCapitalize = 'none'
-          autoCorrect = {false}
           style = {styles.searchInput}
           value = {searchCity}
-          onChangeText = {(search) => onChangeCity(search)}
+          onChangeText = {(search) => onChangeCountry(search)}
           onEndEditing = {() => onSubmitEditing()}
         />
     </View>
@@ -31,8 +30,7 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         padding: 15,
-        borderRadius: 7,
-        flex: 1
+        borderRadius: 7     
     }
 })
 

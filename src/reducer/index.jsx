@@ -1,10 +1,13 @@
-import { persistCombineReducer } from 'redux-persist';
-import FilterReducer from './FilterReducer';
+import { persistCombineReducers } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { reducer as FilterReducer}  from './FilterReducer';
 
 const config = {
-    key: "root"
+    key: "root",
+    storage: AsyncStorage
 }
 
-export default persistCombineReducer (config, {
+export default persistCombineReducers (config, {
     FilterReducer
 })
